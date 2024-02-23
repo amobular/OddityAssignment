@@ -1,0 +1,15 @@
+{
+  "model": {
+    "layers": [3, 3, 3],
+    "strides": [1, 2, 2],
+    "dropout_factor": 0.1,
+    "base_width": 16
+  },
+  "training": {
+    "learning_rate": 0.1,
+    "weight_decay": 0.0,
+    "batch_size": 128,
+    "epochs": 150,
+    "seed": 42
+  }
+}
