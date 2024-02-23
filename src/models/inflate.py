@@ -1,3 +1,4 @@
+import copy
 from typing import Tuple
 import torch
 import torch.nn as nn
@@ -102,7 +103,7 @@ class InflatedModel(nn.Module):
 
     def __init__(self, model: nn.Module):
         super().__init__()
-        self.model = model
+        self.model = copy.deepcopy(model)
         self.model = self.create_inflated_replacement(self.model)
 
     def create_inflated_replacement(self, module: nn.Module):
