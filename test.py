@@ -2,14 +2,11 @@ import json
 from pathlib import Path
 
 import torch
-import torch.nn as nn
 import pytorch_lightning as pl
 import torchvision.transforms as transforms
-from pytorch_lightning.callbacks import ModelCheckpoint
-from torch.utils.data import Subset, DataLoader
+from torch.utils.data import DataLoader
 
 from torchvision.datasets import CIFAR10
-from sklearn.model_selection import train_test_split
 
 from src.lightning.wrapper import LightningImageClassificationWrapper
 from src.models.resnet import ResNet
@@ -62,6 +59,7 @@ def test(config):
 
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-ckpt", "--checkpoint",
                         help="The path to the checkpoint file containing the weights of the trained model",
