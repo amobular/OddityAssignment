@@ -44,11 +44,17 @@ def inflate_convolution(layer: nn.Conv2d):
 
 def inflate_batch_norm(layer: nn.BatchNorm2d):
     replacement = nn.BatchNorm3d(
-        layer.num_features
+        num_features=layer.num_features,
+        affine=layer.affine,
+        track_running_stats=layer.track_running_stats,
+        momentum=layer.momentum,
     )
 
     replacement.weight = layer.weight
     replacement.bias = layer.bias
+    if layer.track_running_stats:
+        replacement.running_mean = layer.running_mean
+        replacement.running_var = layer.running_var
     return replacement
 
 
