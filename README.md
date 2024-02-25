@@ -17,7 +17,7 @@ pip3 install -r requirements.txt
 ```
 
 ## Structure
-The general structure of this project is setup as follows:
+The structure of this project is setup as follows:
 ```
 checkpoints/                Checkpoint files for models (would normally store these in W&B).
 configs/                    Config files for models (would normally store these in W&B).
@@ -26,9 +26,9 @@ src/                        Source code for models, inflation, etc.
     lightning/              Lightning wrapper definintion, main training logic is here.
     models/                 Model definition and code for weight inflation.
 tests/                      Contains some small tests to test inflation.
+classify.py                 Classification script for videos as requested in the assignment.
+notes.md                    Some notes on the paper and an assignment.
 train.py                    Training script for the basic CNN.
 test.py                     Test script for the basic CNN.
-classify.py                 Classification script for videos.
 ```
 
-##

@@ -5,7 +5,8 @@
 
 ### Basic Outline of Choices
 * Image Size: 224:224
-* Temporal Length: 64 Frames (10 frame space at 25 frames per second) 
+* Training Temporal Length: 64 Frames (25 frames per second) 
+* Testing Temporal Length: 250 Frames (averaged over convolutions of 64)
 * Used an InceptionV1 pretrained on ImageNet for both RGB Video and Optical Flow.
   * Does not MaxPool in the time dimension in the beginning.
 * Pretrained *again* on Kinetics-400 for the two benchmark datasets.
@@ -20,16 +21,19 @@
 The augmentations in this paper seem a bit lacking, only the following seem to have been used:
 * Random ReCrop
 * Horizontal Flipping
+* Random Time Start
 
-### Improvements (To be continued...)
+### Improvements
 * Not using InceptionNetV1. 
   * MaxPooling is generally deemed worse than doing a stride or patch merging
-  * `ReLU` is generally deemed worse than something with a gradient in the negative like `GELU` or `SiLU`.
+  * `ReLU` is generally used less these days, activations with a gradient in the negative like `GELU` or `SiLU` are more common now.
   * Deeper networks are generally deemed to be better these days (though it can have tradeoffs for Oddity's use case)
   * As a possible solution it could be replaced with a small `EfficientNetV2` model.
+* Adding an auxilliary head like in the original InceptionV1. It could be that there are vanishing gradients now. 
 * Add `AugMix`, `MixUp`, or `CutMix` and then train for longer.
-* The model needs better temporal integration
+* The model needs better temporal integration:
   * Having a receptive field is not necessarily bad, however something like a 3D `SqueezeExcitation` layer can give the model global understanding of channels throughout the time dimension.
+  * Could also be doing some self-attention across time, but this really depends on how much compute you can spare.
 
 
 ## Part 2 - Technical (CNN and Inflated CNNs)
